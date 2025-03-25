@@ -9,7 +9,7 @@ import getpass as inv
 pill = (Fore.GREEN + '1. Daftar')
 pill1 = (Fore.GREEN + '2. Accaunt List')
 pill2 = (Fore.GREEN + '3. Login')
-pill3 = (Fore.RED  + '4. Exit' + Fore.RESET)
+pill3 = (Fore.RED  + '0. Exit' + Fore.RESET)
 reset = (Fore.WHITE + Back.RED + 'Reset All (type r to reset)' + Fore.RESET + Back.RESET)
 error = (Fore.WHITE + Back.RED + 'incorrent input' + Back.RESET)
 error1 = (Fore.RED + Back.WHITE + '.accaunt.txt is empty!')
@@ -32,6 +32,7 @@ def sign_accaunt():
   password = input("Masukkan password: ")
   saved_accaunt(username, password)
   print("Akun berhasil disimpan!")
+  t.sleep(1)
   log.write(f"{username} has been saved\n")
 
 def see_accaunt():
@@ -39,8 +40,10 @@ def see_accaunt():
   try:
         with open(".accaunt.txt", "r") as file:
           print(file.read())
+          t.sleep(3)
   except FileNotFoundError:
     print(".accaunt.txt is empty!")
+    t.sleep(3)
 
 def login():
   log.write("Mencoba untuk sign in\n")
@@ -64,17 +67,20 @@ def login():
                     break
                     return
     print("Username atau password salah!")
+    t.sleep(3)
     log.write("Login Falied\n")
 
 while True:
-  print("")
+  o.system('clear')
+  o.system('figlet Login Menu | lolcat')
+  print(Style.BRIGHT + "")
   print(pill)
   print(pill1)
   print(pill2)
   print(pill3)
   print(reset)
   print("")
-  e_g = input("Select 1-4: ")
+  e_g = input("Select Menu: ")
   
   if e_g == "1":
     sign_accaunt()
@@ -82,15 +88,16 @@ while True:
     see_accaunt()
   elif e_g == "3":
     login()
-  elif e_g == "4":
+  elif e_g == "0":
     t.sleep(1)
     break
   elif e_g == "r":
     o.system('rm -rf .accaunt.txt')
-    log.write("l.py has been reset!\n")
+    log.write("Login.py has been reset!\n")
     break
   elif e_g == "delfil":
     o.system('rm -rf history.file')
     delfill = open("history(.file) has been deleted", "x")
   else:
     print(error)
+    t.sleep(3)
